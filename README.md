@@ -1,7 +1,9 @@
+一个简单的日志系统，用于记录程序操作，方便程序BUG定位。
+
 # 使用方法
 ## 初始化（程序启动时调用一次）
 ``` c++
-Logger::getInstance().start("logs", true);  // 日志目录 + 是否控制台打印
+Logger::getInstance().start("logs", true);  // para1. 需要存放的日志所在目录名  para2. 控制台同步打印开关
 ```
 ## 记录日志
 ``` c++
@@ -25,10 +27,11 @@ g++ -std=c++17 -o app main.cpp Logger.cpp -lpthread
 ./app
 ```
 
+A simple logging system used to record program operations and facilitate the location of program bugs.
 # Usage
 ## Initialization（called once when the program starts）
 ``` c++
-Logger::getInstance().start("logs", true);  // file directory of logs + whether to print on the console
+Logger::getInstance().start("logs", true);  // Para1. The file directory where the logs need to be stored; Para2. Console synchronous printing switch
 ```
 ## Record logs
 ``` c++

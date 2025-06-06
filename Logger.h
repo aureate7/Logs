@@ -11,7 +11,7 @@
  * 使用方法：
  * 
  * // 初始化（程序启动时调用一次）
- * Logger::getInstance().start("logs", true);  // 日志目录 + 是否控制台打印
+ * Logger::getInstance().start("logs", true);  // para1. 需要存放的日志所在目录名  para2. 控制台同步打印
  * 
  * // 记录日志
  * Logger::getInstance().log("Application started.");
