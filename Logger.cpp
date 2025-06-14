@@ -60,6 +60,25 @@ void Logger::log(const std::string& message, LogLevel level) {
     cv.notify_one();
 }
 
+void Logger::log(const std::string& message, const std::string& tag) {
+    std::ostringstream oss;
+    oss << "[" << getCurrentTime() << "] "
+        << "[" << tag << "] "
+        << message;
+
+    {
+        std::lock_guard<std::mutex> lock(queueMutex);
+        if (logQueue.size() < MAX_QUEUE_SIZE) {
+            logQueue.push({oss.str()});
+        } else {
+            // 丢弃，防止内存撑爆，实际可考虑打报警日志
+            std::cerr << "Logger queue full! Dropping log message." << std::endl;
+        }
+    }
+    cv.notify_one();
+}
+
+
 void Logger::threadFunc() {
     while (running) {
         std::unique_lock<std::mutex> lock(queueMutex);

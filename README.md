@@ -3,13 +3,19 @@
 # 使用方法
 ## 初始化（程序启动时调用一次）
 ``` c++
-Logger::getInstance().start("logs", true);  // para1. 需要存放的日志所在目录名  para2. 控制台同步打印开关
+Logger::getInstance().start("logs", true);  // para1. 需要存放的日志所在目录名(若目录不存在，程序会自动创建目录)  para2. 控制台同步打印开关
 ```
 ## 记录日志
 ``` c++
+void log(const std::string& message, LogLevel level = LogLevel::INFO);
 Logger::getInstance().log("Application started.", LogLevel::INFO); // 默认INFO级别，此处参数可不写
 Logger::getInstance().log("This is a warning!", LogLevel::WARN);
 Logger::getInstance().log("Something went wrong!", LogLevel::ERROR);
+
+void log(const std::string& message, const std::string& tag);
+Logger::getInstance().log("Application started.", "INFO"); // 默认INFO级别，此处参数可不写
+Logger::getInstance().log("This is a warning!", "WARN");
+Logger::getInstance().log("Something went wrong!", "ERROR");
 ```
 Tips: 支持多线程调用 log，线程安全
 ## 程序退出前关闭日志系统
@@ -31,13 +37,19 @@ A simple logging system used to record program operations and facilitate the loc
 # Usage
 ## Initialization（called once when the program starts）
 ``` c++
-Logger::getInstance().start("logs", true);  // Para1. The file directory where the logs need to be stored; Para2. Console synchronous printing switch
+Logger::getInstance().start("logs", true);  // Para1. The file directory where the logs need to be stored(Program will create the file directory automatically if the directory not exists); Para2. Console synchronous printing switch
 ```
 ## Record logs
 ``` c++
+void log(const std::string& message, LogLevel level = LogLevel::INFO);
 Logger::getInstance().log("Application started.", LogLevel::INFO); // default level is INFO, this parameter can be ignored
 Logger::getInstance().log("This is a warning!", LogLevel::WARN);
 Logger::getInstance().log("Something went wrong!", LogLevel::ERROR);
+
+void log(const std::string& message, const std::string& tag);
+Logger::getInstance().log("Application started.", "INFO"); // default level is INFO, this parameter can be ignored
+Logger::getInstance().log("This is a warning!", "WARN");
+Logger::getInstance().log("Something went wrong!", "ERROR");
 ```
 Tips: Support multi-threading call logs，thread safety
 ## Close the Log System before the program exits

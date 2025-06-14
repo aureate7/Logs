@@ -42,6 +42,7 @@ public:
     void stop();
 
     void log(const std::string& message, LogLevel level = LogLevel::INFO);
+    void log(const std::string& message, const std::string& tag = "INFO");
 
 private:
     Logger();
